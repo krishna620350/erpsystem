@@ -1,0 +1,11 @@
+{
+    "local": "http://localhost:",
+    "deployment": {
+        "school": "http://54.86.81.42:"
+    },
+    "port":{
+        "school": 8001,
+        "teacher": 8002,
+        "student": 8003
+    }
+}
