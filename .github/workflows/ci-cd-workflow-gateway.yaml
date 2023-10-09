@@ -26,4 +26,4 @@ jobs:
             - name: Delete old container
               run: docker rm -f gateway-container
             - name: Run docker container
-              run: docker run -d -p 8000:8000 --name school-container ${{ secrets.DOCKER_USERNAME }}/gateway
+              run: docker run -d -p 8000:8000 --name gateway-container ${{ secrets.DOCKER_USERNAME }}/gateway
