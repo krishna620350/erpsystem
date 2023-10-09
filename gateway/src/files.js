@@ -7,6 +7,7 @@ export const dataFiles = {
     createApiProxy,
     logDataMiddleware,
     path: data.local,
+    deploy: data.deployment.school,
     port: data.port,
     contentSecurity,
     typeSecurityGroup

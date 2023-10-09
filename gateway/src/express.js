@@ -10,7 +10,7 @@ app.use(dataFiles.contentSecurity);
 app.use(dataFiles.typeSecurityGroup);
 
 const proxies = [
-  { path: "/school",  target: `${dataFiles.path}${dataFiles.port.school}`, name:"school"},
+  { path: "/school",  target: `${dataFiles.deploy}${dataFiles.port.school}`, name:"school"},
   { path: "/teacher", target: `${dataFiles.path}${dataFiles.port.teacher}`, name:"teacher"},
   { path: "/student", target: `${dataFiles.path}${dataFiles.port.student}`, name:"student"},
 ];
