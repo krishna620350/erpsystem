@@ -1,0 +1,29 @@
+name: CICD
+
+on:
+    push:
+        branches: [master]
+
+jobs:
+    build:
+        runs-on: [ubuntu-latest]
+        steps:
+            - name: Checkout source
+              uses: actions/checkout@v3
+            - name: Login to docker hub
+              run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+            - name: Build docker image
+              run: cd ./gateway && docker build -t ${{ secrets.DOCKER_USERNAME }}/gateway .
+            - name: Publish docker image to hub
+              run: docker push ${{ secrets.DOCKER_USERNAME }}/gateway:latest
+
+    deploy:
+        needs: build
+        runs-on: [aws-ec2]
+        steps:
+            - name: Pull image from docker hub
+              run: docker pull ${{ secrets.DOCKER_USERNAME }}/gateway:latest
+            - name: Delete old container
+              run: docker rm -f gateway-container
+            - name: Run docker container
+              run: docker run -d -p 8000:8000 --name school-container ${{ secrets.DOCKER_USERNAME }}/gateway
